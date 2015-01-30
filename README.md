@@ -21,12 +21,12 @@ func main() {
     }
 
     for _, part := range parts {
-        fmt.Printf("Found partition: %v Size: %v\n", part.Name, part.Blocks)
+        fmt.Printf("Found partition: %v Blocks: %v\n", part.Name, part.Blocks)
     }
 }
-// Found partition: name Size: #blocks
-// Found partition: sr0 Size: 1048575
-// Found partition: sda Size: 43008000
-// Found partition: sda1 Size: 877568
-// Found partition: sda2 Size: 1 
+
+// Found partition: sr0 Blocks: 1048575
+// Found partition: sda Blocks: 43008000
+// Found partition: sda1 Blocks: 877568
+// Found partition: sda2 Blocks: 1 
 ```
