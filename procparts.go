@@ -2,13 +2,14 @@ package procparts
 
 import (
 	"io/ioutil"
+	"strconv"
 	"strings"
 )
 
 type Partition struct {
-	Major  string
-	Minor  string
-	Blocks string
+	Major  uint64
+	Minor  uint64
+	Blocks uint64
 	Name   string
 }
 
@@ -25,14 +26,29 @@ func GetPartitions() ([]Partition, error) {
 	for _, line := range strings.Split(string(data), "\n") {
 		fields := strings.Fields(line)
 
-		if len(fields) == 0 {
+		if len(fields) == 0 || fields[0] == "major" {
 			continue
 		}
 
+		major, err := strconv.ParseUint(fields[0], 0, 64)
+		if err != nil {
+			return nil, err
+		}
+
+		minor, err := strconv.ParseUint(fields[1], 0, 64)
+		if err != nil {
+			return nil, err
+		}
+
+		blocks, err := strconv.ParseUint(fields[2], 0, 64)
+		if err != nil {
+			return nil, err
+		}
+
 		partition := Partition{
-			Major:  fields[0],
-			Minor:  fields[1],
-			Blocks: fields[2],
+			Major:  major,
+			Minor:  minor,
+			Blocks: blocks,
 			Name:   fields[3],
 		}
 
